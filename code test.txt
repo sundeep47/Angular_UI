@@ -1,0 +1,240 @@
+var node = document.createElement("LI");
+    					var userli = document.createTextNode(username);
+  					 node.appendChild(userli);
+    			  document.getElementById("users").appendChild(node);
+       
+            document.getElementById("message").innerHTML=this.status;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+/*
+Assignement:
+
+HTML: Complete the HTML to have semantic and compliant markups.
+
+JAVASCRIPT: Dynamically add a user to the users list.
+- Highlight the email input when a user enters an invalid email address and display following message: "please enter a valid email address" in red.
+- Use the add_user function to submit the user's data.
+- If the ajax request returns an error, display the error message in red.
+- Display the newly added user in the users list when the request was successful.
+- Do not use any libraries e.g. bootstrap
+- no jQuery
+- add some CSS3 properties
+- code cleanup/format
+- explain or propose improvements in comments
+- remove inline code/styles
+
+*/
+
+
+// START YOUR CODE HERE
+function add_user()
+{
+    document.getElementById("message").innerHTML="";
+     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        var emailid=document.getElementById("email").value;
+       var username=document.getElementById("name").value;
+        if (reg.test(emailid) == false) 
+        {
+        // alert(emailid);
+            document.getElementById("message").innerHTML="please                 enter a valid email address" ;
+        }
+        else
+        {
+        var node = document.createElement("LI");
+    var userli = document.createTextNode(username);
+   node.appendChild(userli);
+    document.getElementById("users").appendChild(node);
+        }
+        
+}
+
+// END YOUR CODE HERE
+
+
+
+
+// Do not modify this function. Add user service wrapper.
+function addUser(username, email, callback) {
+    var response,
+        success = (!!Math.round(Math.random()));
+    
+    if(!success){
+        response = JSON.stringify({
+            success: success,
+            error: "Oups, something went wrong!"
+        });
+    } else {
+        response = JSON.stringify({
+            success: success,
+            user: {
+                username: username,
+                email: email
+            }
+        });   
+    }
+    
+    $.ajax({
+        url: '/echo/json/',
+        type: "post",
+        data: {
+            json: response
+        },
+        success: callback
+    });
+};
+
+<p id="message">
+
+
+</p>
+<h2>Add a User:
+</h2>
+<form id="add-user" method="POST">
+<input type="text" id="name" name="username" placeholder="name"/>
+<input type="email" id="email" name="email" placeholder="email"/>
+<button id="btn" onclick="add_user();return false;">add user</button>
+</form>
+<div id="errors"></div>
+<h2>Users:
+</h2>
+<ul id="users">
+</ul>                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Assignement:
+
+HTML: Complete the HTML to have semantic and compliant markups.
+
+JAVASCRIPT: Dynamically add a user to the users list.
+- Highlight the email input when a user enters an invalid email address and display following message: "please enter a valid email address" in red.
+- Use the add_user function to submit the user's data.
+- If the ajax request returns an error, display the error message in red.
+- Display the newly added user in the users list when the request was successful.
+- Do not use any libraries e.g. bootstrap
+- no jQuery
+- add some CSS3 properties
+- code cleanup/format
+- explain or propose improvements in comments
+- remove inline code/styles
+
+*/
+
+
+// START YOUR CODE HERE
+function add_user()
+{
+    document.getElementById("message").innerHTML="";
+     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+       var emailid=document.getElementById("email").value;
+       var username=document.getElementById("name").value;
+        if (reg.test(emailid) == false) 
+        {
+        // alert(emailid);
+            document.getElementById("message").innerHTML="please                 enter a valid email address" ;
+        }
+        else
+        {
+         var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange=function() 
+        {
+         if (this.readyState == 4 && this.status == 200) 
+          {
+  	 	       var node = document.createElement("LI");
+    					var userli = document.createTextNode(username);
+  					 node.appendChild(userli);
+    			  document.getElementById("users").appendChild(node);
+       
+            document.getElementById("message").innerHTML=this.status;           }
+           else
+           {
+             if (this.readyState == 4) 
+             {
+            //	var node = document.createElement("LI");
+    				//	var userli = document.createTextNode(username);
+  					 // node.appendChild(userli);
+    			    //document.getElementById("users").appendChild(node);
+               document.getElementById("message").innerHTML=this.status; 
+              }
+           }
+  };
+  xhttp.open("GET", "url?name=" + username+"&emailid"+emailid, true);
+  xhttp.send();
+       			
+        }
+        
+        
+        
+}
+
+// END YOUR CODE HERE
+
+
+
+
+// Do not modify this function. Add user service wrapper.
+function addUser(username, email, callback) {
+    var response,
+        success = (!!Math.round(Math.random()));
+    
+    if(!success){
+        response = JSON.stringify({
+            success: success,
+            error: "Oups, something went wrong!"
+        });
+    } else {
+        response = JSON.stringify({
+            success: success,
+            user: {
+                username: username,
+                email: email
+            }
+        });   
+    }
+    
+    $.ajax({
+        url: '/echo/json/',
+        type: "post",
+        data: {
+            json: response
+        },
+        success: callback
+    });
+};
+
+
+
+
+
+
+
